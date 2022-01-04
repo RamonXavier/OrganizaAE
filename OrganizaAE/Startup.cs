@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using OrganizaAE.Infrastructure;
+using OrganizaAE.Models.User;
 
 namespace OrganizaAE
 {
@@ -35,12 +36,6 @@ namespace OrganizaAE
 
             services.AddDbContext<OrganizaAeDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
-
-            services.AddDbContext<OrganizaAeIdentityDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
-
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<OrganizaAeIdentityDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

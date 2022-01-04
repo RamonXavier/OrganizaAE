@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrganizaAE.Models.Social
@@ -9,5 +10,7 @@ namespace OrganizaAE.Models.Social
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public IEnumerable<Payment.Payment> Payments { get; set; }
     }
 }
