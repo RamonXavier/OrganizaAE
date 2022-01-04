@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrganizaAE.Infrastructure;
 
-namespace OrganizaAE.Migrations
+namespace OrganizaAE.Migrations.OrganizaAeIdentityDb
 {
-    [DbContext(typeof(OrganizaAeDbContext))]
-    [Migration("20211228022522_First_CreateDatabase")]
-    partial class First_CreateDatabase
+    [DbContext(typeof(OrganizaAeIdentityDbContext))]
+    [Migration("20220104025401_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
