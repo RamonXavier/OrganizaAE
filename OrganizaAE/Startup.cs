@@ -18,6 +18,8 @@ using OrganizaAE.Infrastructure.Payment;
 using OrganizaAE.Infrastructure.Social;
 using OrganizaAE.Infrastructure.User;
 using OrganizaAE.Models.User;
+using AutoMapper;
+using OrganizaAE.Profiles;
 
 namespace OrganizaAE
 {
@@ -57,6 +59,15 @@ namespace OrganizaAE
             services.AddScoped<IMounthService, MounthService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<ISocialService, SocialService>();
+
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ProfilesAutomaper());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
