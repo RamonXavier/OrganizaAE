@@ -1,6 +1,6 @@
 ﻿namespace OrganizaAE.Infrastructure
 {
-    public class Entity
+    public interface IRepository<T>
     {
     }
 }

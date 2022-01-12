@@ -2,7 +2,7 @@
 
 namespace OrganizaAE.Controllers
 {
-    public class UserController : Controller
+    public class SocialController : Controller
     {
         public IActionResult Index()
         {
