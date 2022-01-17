@@ -6,6 +6,9 @@ namespace OrganizaAE.Feactures.Social.Service
 {
     public interface ISocialService
     {
-        Task<IEnumerable<SocialDto>> Buscar();
+        Task<IEnumerable<SocialDto>> Get();
+        Task<SocialDto> Create(SocialDto socialDto);
+        Task<SocialDto> Update(SocialDto socialDto);
+        Task Remove(int id);
     }
 }

@@ -17,11 +17,33 @@ namespace OrganizaAE.Feactures.Social.Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<SocialDto>> Buscar()
+        public async Task<IEnumerable<SocialDto>> Get()
         {
-            var sociais = await _socialRepository.GetAllAsync();
-            var listaDto = _mapper.Map<IEnumerable<SocialDto>>(sociais);
-            return listaDto;
+            var socials = await _socialRepository.GetAllAsync();
+            var listDto = _mapper.Map<IEnumerable<SocialDto>>(socials);
+            return listDto;
+        }
+
+        public async Task<SocialDto> Create(SocialDto socialDto)
+        {
+            var socialMapped = _mapper.Map<Models.Social.Social>(socialDto);
+            await _socialRepository.AddAndSaveAsync(socialMapped);
+            return _mapper.Map<SocialDto>(socialMapped);
+        }
+
+        public async Task<SocialDto> Update(SocialDto socialDto)
+        {
+            var socialMapped = _mapper.Map<Models.Social.Social>(socialDto);
+            await _socialRepository.UpdateAsync(socialMapped);
+            await _socialRepository.Save();
+            return _mapper.Map<SocialDto>(socialMapped);
+        }
+
+        public async Task Remove(int id)
+        {
+            var social = await _socialRepository.GetByIdAsync(id);
+            await _socialRepository.DeleteAsync(social);
+            await _socialRepository.Save();
         }
     }
 }
