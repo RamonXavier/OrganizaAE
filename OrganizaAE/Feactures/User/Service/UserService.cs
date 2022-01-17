@@ -28,6 +28,16 @@ namespace OrganizaAE.Feactures.User.Service
             return usersMapped;
         }
 
+        public async Task<UserDto> GetById(int id)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+
+            if (user == null) throw new Exception("Usuário não encontrado");
+            var userMapped = _mapper.Map<UserDto>(user);
+
+            return userMapped;
+        }
+
         public async Task Login(UserLoginDto userDto)
         {
             var usuarioValido = await UserIsValid(userDto);

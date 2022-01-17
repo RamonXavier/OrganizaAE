@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using OrganizaAE.Feactures.Mounth.Dto;
@@ -23,6 +24,17 @@ namespace OrganizaAE.Feactures.Mounth.Service
             var listMounthsMapped = _mapper.Map<IEnumerable<MounthDto>>(mounths);
             return listMounthsMapped;
         }
+
+        public async Task<MounthDto> GetById(int id)
+        {
+            var mounth = await _mounthRepository.GetByIdAsync(id);
+
+            if (mounth == null) throw new Exception("Mês não encontrado");
+
+            var mounthMapped = _mapper.Map<MounthDto>(mounth);
+            return mounthMapped;
+        }
+
 
         public async Task<MounthDto> Create(MounthDto mounthDto)
         {

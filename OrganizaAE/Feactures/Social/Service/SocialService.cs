@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using OrganizaAE.Feactures.Social.Dto;
@@ -22,6 +23,16 @@ namespace OrganizaAE.Feactures.Social.Service
             var socials = await _socialRepository.GetAllAsync();
             var listDto = _mapper.Map<IEnumerable<SocialDto>>(socials);
             return listDto;
+        }
+
+        public async Task<SocialDto> GetById(int id)
+        {
+            var social = await _socialRepository.GetByIdAsync(id);
+
+            if (social == null) throw new Exception("Social não encontrada");
+
+            var dto = _mapper.Map<SocialDto>(social);
+            return dto;
         }
 
         public async Task<SocialDto> Create(SocialDto socialDto)

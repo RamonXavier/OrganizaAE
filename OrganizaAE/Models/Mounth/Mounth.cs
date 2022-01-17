@@ -12,7 +12,5 @@ namespace OrganizaAE.Models.Mounth
         public int Id { get; set; }
         public string Name { get; set; }
         public int Number { get; set; }
-
-        public IEnumerable<Payment.Payment> Payments { get; set; }
     }
 }

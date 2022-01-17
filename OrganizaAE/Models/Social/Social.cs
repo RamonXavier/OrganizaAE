@@ -11,7 +11,5 @@ namespace OrganizaAE.Models.Social
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public IEnumerable<Payment.Payment> Payments { get; set; }
     }
 }

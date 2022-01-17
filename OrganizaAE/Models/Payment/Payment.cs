@@ -13,10 +13,15 @@ namespace OrganizaAE.Models.Payment
 
         public int Year { get; set; }
 
+        public int Status { get; set; }
+
+        public int UserId { get; set; }
         public virtual User.User User { get; set; }
 
+        public int SocialId { get; set; }
         public virtual Social.Social Social{ get; set; }
-        
+
+        public int MounthId { get; set; }
         public virtual Mounth.Mounth Mounth { get; set; }
     }
 }
