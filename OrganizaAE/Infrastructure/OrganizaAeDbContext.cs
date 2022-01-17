@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrganizaAE.Models.Mounth;
 
 namespace OrganizaAE.Infrastructure
 {
@@ -8,11 +7,6 @@ namespace OrganizaAE.Infrastructure
         public OrganizaAeDbContext(DbContextOptions<OrganizaAeDbContext> options) : base(options)
         {
 
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Models.Mounth.Mounth> Mounths { get; set; }

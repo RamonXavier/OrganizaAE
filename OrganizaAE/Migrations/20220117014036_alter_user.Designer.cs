@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrganizaAE.Infrastructure;
 
 namespace OrganizaAE.Migrations
 {
     [DbContext(typeof(OrganizaAeDbContext))]
-    partial class OrganizaAeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220117014036_alter_user")]
+    partial class alter_user
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
