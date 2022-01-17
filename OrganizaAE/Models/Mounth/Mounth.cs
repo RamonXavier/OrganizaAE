@@ -5,7 +5,7 @@ using OrganizaAE.Infrastructure;
 
 namespace OrganizaAE.Models.Mounth
 {
-    public class Mount : Entity
+    public class Mounth : Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

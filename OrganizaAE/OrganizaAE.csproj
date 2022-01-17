@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Feactures\Mounth\Dto\" />
     <Folder Include="Feactures\Payment\Dto\" />
     <Folder Include="Feactures\User\Dto\" />
   </ItemGroup>

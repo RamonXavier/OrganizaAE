@@ -17,6 +17,6 @@ namespace OrganizaAE.Models.Payment
 
         public virtual Social.Social Social{ get; set; }
         
-        public virtual Mount Mounth { get; set; }
+        public virtual Mounth.Mounth Mounth { get; set; }
     }
 }

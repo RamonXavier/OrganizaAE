@@ -19,7 +19,7 @@ namespace OrganizaAE.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("OrganizaAE.Models.Mounth.Mount", b =>
+            modelBuilder.Entity("OrganizaAE.Models.Mounth.Mounth", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -144,7 +144,7 @@ namespace OrganizaAE.Migrations
 
             modelBuilder.Entity("OrganizaAE.Models.Payment.Payment", b =>
                 {
-                    b.HasOne("OrganizaAE.Models.Mounth.Mount", "Mounth")
+                    b.HasOne("OrganizaAE.Models.Mounth.Mounth", "Mounth")
                         .WithMany("Payments")
                         .HasForeignKey("MounthId");
 
@@ -163,7 +163,7 @@ namespace OrganizaAE.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OrganizaAE.Models.Mounth.Mount", b =>
+            modelBuilder.Entity("OrganizaAE.Models.Mounth.Mounth", b =>
                 {
                     b.Navigation("Payments");
                 });

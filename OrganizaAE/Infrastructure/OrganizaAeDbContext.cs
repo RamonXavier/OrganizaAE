@@ -15,7 +15,7 @@ namespace OrganizaAE.Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Mount> Mounths { get; set; }
+        public DbSet<Models.Mounth.Mounth> Mounths { get; set; }
         public DbSet<Models.Payment.Payment> Payments{ get; set; }
         public DbSet<Models.Social.Social> Socials { get; set; }
         public DbSet<Models.User.User> Users { get; set; }
