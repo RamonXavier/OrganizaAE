@@ -17,5 +17,13 @@
             Nov = 11,
             Dez = 12
         }
+
+        public enum StatusPayment
+        {
+            PaidOut = 1,
+            Waiting = 2,
+            Pendending = 3,
+            Late = 4,
+        }
     }
 }

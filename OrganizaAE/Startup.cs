@@ -8,8 +8,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
+using OrganizaAE.Feactures.Mounth.Service;
+using OrganizaAE.Feactures.Payment.Service;
+using OrganizaAE.Feactures.Social.Service;
+using OrganizaAE.Feactures.User.Service;
 using OrganizaAE.Infrastructure;
+using OrganizaAE.Infrastructure.Mounth;
+using OrganizaAE.Infrastructure.Payment;
+using OrganizaAE.Infrastructure.Social;
+using OrganizaAE.Infrastructure.User;
 using OrganizaAE.Models.User;
+using AutoMapper;
+using OrganizaAE.Profiles;
 
 namespace OrganizaAE
 {
@@ -25,9 +35,6 @@ namespace OrganizaAE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -36,6 +43,28 @@ namespace OrganizaAE
 
             services.AddDbContext<OrganizaAeDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+
+            //Repository
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IMounthRepository, MounthRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<ISocialRepository, SocialRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            //Services
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMounthService, MounthService>();
+            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<ISocialService, SocialService>();
+
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ProfilesAutomaper());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

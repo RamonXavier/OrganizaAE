@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrganizaAE.Models.Mounth;
-using OrganizaAE.Models.Payment;
-using OrganizaAE.Models.Social;
 
 namespace OrganizaAE.Infrastructure
 {
@@ -12,14 +9,10 @@ namespace OrganizaAE.Infrastructure
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
-
-        public DbSet<Mount> Mounths { get; set; }
-        public DbSet<Payment> Payments{ get; set; }
-        public DbSet<Social> Socials { get; set; }
+        public DbSet<Models.Mounth.Mounth> Mounths { get; set; }
+        public DbSet<Models.Payment.Payment> Payments{ get; set; }
+        public DbSet<Models.Social.Social> Socials { get; set; }
+        public DbSet<Models.User.User> Users { get; set; }
 
     }
 }
