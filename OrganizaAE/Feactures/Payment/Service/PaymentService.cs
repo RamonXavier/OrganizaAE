@@ -44,30 +44,14 @@ namespace OrganizaAE.Feactures.Payment.Service
 
         public async Task Create(PaymentDto paymentDto)
         {
-            var payment = new Models.Payment.Payment()
-            {
-                UserId = paymentDto.IdUser,
-                SocialId = paymentDto.IdMounth,
-                MounthId = paymentDto.IdSocial,
-                Status = (int) paymentDto.Status,
-                Year = paymentDto.Year,
-                Id = 0,
-            };
-
-            await _paymentRepository.AddAndSaveAsync(payment);
+            var paymentMapped = _mapper.Map<Models.Payment.Payment>(paymentDto);
+            await _paymentRepository.AddAndSaveAsync(paymentMapped);
         }
 
         public async Task Update(PaymentDto paymentDto)
         {
-            var paymentActualy = await _paymentRepository.GetByIdAsync(paymentDto.Id);
-
-            paymentActualy.UserId = paymentDto.IdUser;
-            paymentActualy.MounthId = paymentDto.IdMounth;
-            paymentActualy.SocialId = paymentDto.IdSocial;
-            paymentActualy.Status = (int) paymentDto.Status;
-            paymentActualy.Year = paymentDto.Year;
-
-            await _paymentRepository.UpdateAsync(paymentActualy);
+            var paymentMapped = _mapper.Map<Models.Payment.Payment>(paymentDto);
+            await _paymentRepository.UpdateAsync(paymentMapped);
         }
 
         public async Task Delete(int idPayment)

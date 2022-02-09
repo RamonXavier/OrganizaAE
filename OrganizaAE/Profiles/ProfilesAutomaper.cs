@@ -15,8 +15,11 @@ namespace OrganizaAE.Profiles
         public ProfilesAutomaper()
         {
             CreateMap<Social, SocialDto>().ReverseMap();
+
             CreateMap<Mounth, MounthDto>().ReverseMap();
+
             CreateMap<User, UserDto>().ReverseMap();
+
             CreateMap<Payment, PaymentCompleteDto>()
                 .ForMember(dest => dest.IdSocial, forn => forn.MapFrom(src => src.Social.Id))
                 .ForMember(dest => dest.NameSocial, forn => forn.MapFrom(src => src.Social.Name))
@@ -27,7 +30,13 @@ namespace OrganizaAE.Profiles
                 .ForMember(dest => dest.NameMounth, forn => forn.MapFrom(src => src.Mounth.Name))
                 .ForMember(dest => dest.NumberMounth, forn => forn.MapFrom(src => src.Mounth.Number))
                 .ForMember(dest => dest.Year, forn => forn.MapFrom(src => src.Year))
-                .ForMember(dest => dest.Status, forn => forn.MapFrom(src => src.Status));
+                .ForMember(dest => dest.Status, forn => forn.MapFrom(src => src.Status)).ReverseMap();
+            CreateMap<Payment, PaymentDto>()
+                .ForMember(dest => dest.IdMounth, forn => forn.MapFrom(src => src.MounthId))
+                .ForMember(dest => dest.IdSocial, forn => forn.MapFrom(src => src.SocialId))
+                .ForMember(dest => dest.IdUser, forn => forn.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Status, forn => forn.MapFrom(src => src.Status))
+                .ForMember(dest => dest.Id, forn => forn.MapFrom(src => src.Id)).ReverseMap();
         }
     }
 }
