@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using OrganizaAE.Feactures.Mounth.Service;
@@ -33,6 +35,13 @@ namespace OrganizaAE.Feactures.Payment.Service
             return listMapped;
         }
 
+        public async Task<PaymentCompleteDto> GetById(int idPayment)
+        {
+            var payment = await _paymentRepository.GetAllAsyncWithSocialAndUserAndMounthById(idPayment);
+            var mapped = _mapper.Map<PaymentCompleteDto>(payment);
+            return mapped;
+        }
+
         public async Task Create(PaymentDto paymentDto)
         {
             var payment = new Models.Payment.Payment()
@@ -46,6 +55,26 @@ namespace OrganizaAE.Feactures.Payment.Service
             };
 
             await _paymentRepository.AddAndSaveAsync(payment);
+        }
+
+        public async Task Update(PaymentDto paymentDto)
+        {
+            var paymentActualy = await _paymentRepository.GetByIdAsync(paymentDto.Id);
+
+            paymentActualy.UserId = paymentDto.IdUser;
+            paymentActualy.MounthId = paymentDto.IdMounth;
+            paymentActualy.SocialId = paymentDto.IdSocial;
+            paymentActualy.Status = (int) paymentDto.Status;
+            paymentActualy.Year = paymentDto.Year;
+
+            await _paymentRepository.UpdateAsync(paymentActualy);
+        }
+
+        public async Task Delete(int idPayment)
+        {
+            var paymentActualy = await _paymentRepository.GetByIdAsync(idPayment);
+            await _paymentRepository.DeleteAsync(paymentActualy);
+            await _paymentRepository.Save();
         }
     }
 }

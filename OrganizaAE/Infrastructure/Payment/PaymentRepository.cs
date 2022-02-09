@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace OrganizaAE.Infrastructure.Payment
 {
@@ -18,6 +18,16 @@ namespace OrganizaAE.Infrastructure.Payment
                 .Include(x => x.Mounth)
                 .Include(x => x.Social)
                 .ToListAsync();
+        }
+
+        public async Task<Models.Payment.Payment> GetAllAsyncWithSocialAndUserAndMounthById(int idPayment)
+        {
+            return await _dbContext.Payments.AsNoTracking()
+                .Include(x => x.User)
+                .Include(x => x.Mounth)
+                .Include(x => x.Social)
+                .Where(x=>x.Id == idPayment)
+                .FirstOrDefaultAsync();
         }
     }
 }
