@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrganizaAE.Feactures.Social.Dto;
 using OrganizaAE.Feactures.Social.Service;
@@ -17,32 +18,74 @@ namespace OrganizaAE.Controllers
             _socialService = socialService;
         }
 
-        [HttpGet("api/Sociais")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var sociais = await _socialService.Get();
-            return Ok(sociais);
+            try
+            {
+                var sociais = await _socialService.Get();
+                return Ok(sociais);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPost("api/Sociais/Create")]
+        [HttpGet("GertById/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            try
+            {
+                var sociais = await _socialService.GetById(id);
+                return Ok(sociais);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(SocialDto social)
         {
-            var socialDto = await _socialService.Create(social);
-            return Ok(socialDto);
+            try
+            {
+                var socialDto = await _socialService.Create(social);
+                return Ok(socialDto);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPut("api/Sociais/Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(SocialDto social)
         {
-            var socialDto = await _socialService.Update(social);
-            return Ok(socialDto);
+            try
+            {
+                var socialDto = await _socialService.Update(social);
+                return Ok(socialDto);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpDelete("api/Sociais/Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _socialService.Remove(id);
-            return Ok();
+            try
+            {
+                await _socialService.Remove(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

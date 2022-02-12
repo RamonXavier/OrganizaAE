@@ -10,6 +10,6 @@ namespace OrganizaAE.Feactures.Mounth.Service
         Task<MounthDto> GetById(int id);
         Task<MounthDto> Create(MounthDto mounthDto);
         Task<MounthDto> Update(MounthDto mounthDto);
-        Task Remove(int id);
+        Task Delete(int id);
     }
 }

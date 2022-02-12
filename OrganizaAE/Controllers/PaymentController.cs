@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrganizaAE.Feactures.Payment.Dto;
 using OrganizaAE.Feactures.Payment.Service;
@@ -17,39 +18,75 @@ namespace OrganizaAE.Controllers
             _paymentService = paymentService;
         }
 
-        [HttpGet("api/Payment")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var listPayment = await _paymentService.Get();
-            return Ok(listPayment);
+            try
+            {
+                var listPayment = await _paymentService.Get();
+                return Ok(listPayment);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpGet("api/Payment/{idPayment}")]
+        [HttpGet("GetById/{idPayment}")]
         public async Task<IActionResult> GetById(int idPayment)
         {
-            var listPayment = await _paymentService.GetById(idPayment);
-            return Ok(listPayment);
+            try
+            {
+                var payment = await _paymentService.GetById(idPayment);
+                return Ok(payment);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPost("api/Payment/Create")]
+        [HttpPost("Create")]
         public async Task<IActionResult> CreateAsync(PaymentDto payment)
         {
-            await _paymentService.Create(payment);
-            return Ok();
+            try
+            {
+                await _paymentService.Create(payment);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPut("api/Payment/Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> UpdateAsync(PaymentDto payment)
         {
-            await _paymentService.Update(payment);
-            return Ok();
+            try
+            {
+                await _paymentService.Update(payment);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
         }
 
-        [HttpDelete("api/Payment/Delete/{idPayment}")]
+        [HttpDelete("Delete/{idPayment}")]
         public async Task<IActionResult> UpdateAsync(int idPayment)
         {
-            await _paymentService.Delete(idPayment);
-            return Ok();
+            try
+            {
+                await _paymentService.Delete(idPayment);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

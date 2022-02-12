@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrganizaAE.Feactures.User.Dto;
 using OrganizaAE.Feactures.User.Service;
@@ -16,39 +17,88 @@ namespace OrganizaAE.Controllers
             _userService = userService;
         }
 
-        [HttpGet("api/User")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var users = await _userService.Get();
-            return Ok(users);
+            try
+            {
+                var users = await _userService.Get();
+                return Ok(users);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPost("api/User/Create")]
+        [HttpGet("GetById/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            try
+            {
+                var user = await _userService.GetById(id);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(UserDto userDto)
         {
-            var users = await _userService.Create(userDto);
-            return Ok(users);
+            try
+            {
+                var users = await _userService.Create(userDto);
+                return Ok(users);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPost("api/User/Login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login(UserLoginDto userDto)
         {
-            await _userService.Login(userDto);
-            return Ok();
+            try
+            {
+                await _userService.Login(userDto);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPut("api/User/Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> Login(UserDto userDto)
         {
-            var user = await _userService.Update(userDto);
-            return Ok(user);
+            try
+            {
+                var user = await _userService.Update(userDto);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpDelete("api/User/Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _userService.Remove(id);
-            return Ok();
+            try
+            {
+                await _userService.Remove(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

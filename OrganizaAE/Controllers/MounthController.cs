@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrganizaAE.Feactures.Mounth.Dto;
 using OrganizaAE.Feactures.Mounth.Service;
@@ -17,32 +18,75 @@ namespace OrganizaAE.Controllers
             _mounthService = mounthService;
         }
 
-        [HttpGet("api/Mounth")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var mounths = await _mounthService.Get();
-            return Ok(mounths);
+            try
+            {
+                var mounths = await _mounthService.Get();
+                return Ok(mounths);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPost("api/Mounth/Create")]
+        [HttpGet("GetById/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var mounth = await _mounthService.GetById(id);
+                return Ok(mounth);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(MounthDto mounthDto)
         {
-            var mounth = await _mounthService.Create(mounthDto);
-            return Ok(mounth);
+
+            try
+            {
+                var mounth = await _mounthService.Create(mounthDto);
+                return Ok(mounth);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPut("api/Mounth/Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(MounthDto mounthDto)
         {
-            var mounth = await _mounthService.Update(mounthDto);
-            return Ok(mounth);
+            try
+            {
+                var mounth = await _mounthService.Update(mounthDto);
+                return Ok(mounth);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpDelete("api/Mounth/Delete")]
-        public async Task<IActionResult> Remove(int id)
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            await _mounthService.Remove(id);
-            return Ok();
+            try
+            {
+                await _mounthService.Delete(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

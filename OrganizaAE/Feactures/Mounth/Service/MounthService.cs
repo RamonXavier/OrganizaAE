@@ -53,7 +53,7 @@ namespace OrganizaAE.Feactures.Mounth.Service
             return _mapper.Map<MounthDto>(mounthMapped);
         }
 
-        public async Task Remove(int id)
+        public async Task Delete(int id)
         {
             var mounth = await _mounthRepository.GetByIdAsync(id);
             await _mounthRepository.DeleteAsync(mounth);
